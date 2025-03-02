@@ -1,0 +1,86 @@
+<div class="wrapper">
+<div style="margin: 25px">
+    <button (click)="addLessonClick()" mat-flat-button color="primary" class="add-course-btn">
+      <mat-icon class="icon">add</mat-icon>
+      Add Lesson
+    </button>
+</div>
+
+<div class="lessons-container">
+    @for (lesson of (lessons$ | async); track lesson.title) {
+      <mat-card class="lesson-card">
+        <div class="lesson-row">
+            <div>
+          <span style="margin-right: 8px;" class="lesson-title">{{ lesson.title }}</span>
+          <span>{{ lesson.content }}</span>
+            </div>
+          <div class="actions">
+            <button appTooltip tooltip="edit" mat-icon-button class="icon-btn" (click)="editLessonClick(lesson)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button appTooltip tooltip="delete" mat-icon-button class="icon-btn" (click)="deleteLessonClick(lesson.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-card>
+    }
+</div>
+</div>
+
+
+@if(flagEdit){
+    <app-lesson-form [lesson]="lessonToEditOrAdd" (lessonUpdated)="updateLesson($event)"></app-lesson-form>
+}
+@if(flagAdd){
+    <app-lesson-form [lesson]="lessonToEditOrAdd" (lessonUpdated)="addLesson($event)"></app-lesson-form>
+}
+
+<style>
+  .lessons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80%;
+    padding: 0 25px;
+  }
+  .wrapper {
+    margin-left: 150px;
+  }
+  .lesson-card {
+    width: 100%;
+    min-height: 60px;
+    /* background: #f5f5f5; */
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-top: 10px;
+    transition: transform 0.5s, box-shadow 0.2s;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .lesson-card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: scale(1.001);
+  }
+  .lesson-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .lesson-title {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .icon-btn mat-icon {
+    color: #333;
+  }
+</style>
+
+
