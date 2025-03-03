@@ -12,6 +12,7 @@ import{Router}from '@angular/router';
 import { UserService } from '../../service/user/user.service';
 import { User } from '../../models/User';
 import { TooltipDirective } from '../../directive/tooltip.directive';
+import { EnrollService } from '../../service/enroll/enroll.service';
 @Component({
   selector: 'app-courses',
   standalone: true,
@@ -23,8 +24,9 @@ import { TooltipDirective } from '../../directive/tooltip.directive';
 export class CoursesComponent implements OnInit {
   public courses$:Observable<Course[]> = this.coursesService.courses;  
 
-  constructor(private coursesService: CoursesService,private route: ActivatedRoute,private router:Router,private userService:UserService) { }
-  auth = this.userService.user;
+  constructor(private coursesService: CoursesService,private route: ActivatedRoute,private router:Router,private userService:UserService,private enrollService: EnrollService) { }
+  auth$ = this.userService.user;
+  courseStudent$=this.enrollService.coursesToStudent;
   ngOnInit(): void {
     this.coursesService.getCourses();  
   }
@@ -65,5 +67,16 @@ addCourseClick(){
   this.flagAdd = false;
   console.log(newCourse);
   
+}
+courseExist(id:Number){
+  return this.courseStudent$.value.some(c => c.id === id)
+ }
+ login(id: Number){
+  console.log(this.courseStudent$.value)
+   this.enrollService.addRoll(id,this.userService.user.value.id);
+}
+
+logout(id: Number){
+  this.enrollService.deleteRoll(id,this.userService.user.value.id);
 }
 }

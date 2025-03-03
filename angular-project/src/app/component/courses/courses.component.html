@@ -1,4 +1,4 @@
-@if(auth.value.role=="teacher"||auth.value.role=="admin")
+@if(auth$.value.role=="teacher"||auth$.value.role=="admin")
 {
 <div style="margin-top: 25px; margin-left: 25px;">
   <button (click)="addCourseClick()" mat-flat-button color="primary" class="add-course-btn">
@@ -17,13 +17,24 @@
     </mat-card-header>
 
     <mat-card-actions class="actions">
-      @if(auth.value.role=="teacher"||auth.value.role=="admin"){
+      @if(auth$.value.role=="teacher"||auth$.value.role=="admin"){
       <button appTooltip tooltip="edit" mat-icon-button class="icon-btn" (click)="editCourseClick(course)">
         <mat-icon>edit</mat-icon>
       </button>
       <button appTooltip tooltip="delete" mat-icon-button class="icon-btn" (click)="deleteCourseClick(course.id)">
         <mat-icon>delete</mat-icon>
       </button>
+      }@else {  
+          @if(!courseExist(course.id)){
+             <button mat-icon-button (click)="login(course.id)" appTooltip tooltip="login">
+                <mat-icon>login</mat-icon>
+             </button>
+          }
+          @else{
+          <button mat-icon-button (click)="logout(course.id)" appTooltip tooltip="logout">
+            <mat-icon>logout</mat-icon>
+          </button>
+        }
       }
       <button appTooltip tooltip="lessons list" mat-icon-button class="icon-btn" (click)="viewLessonsClick(course.id)">
         <mat-icon>assignment</mat-icon>

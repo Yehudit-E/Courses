@@ -19,20 +19,30 @@ export class CoursesService {
   }
 
   addCourse(course: Course) {
-    this.http.post<any>(this.baseUrl, course).subscribe(data => {
+    this.http.post<any>(this.baseUrl, course).subscribe(
+    data => {
       this.getCourses();
+    },
+    error=>{
+      alert("failed")
     })
   }
 
   editCourse(courseId: number, course: Course) {
     this.http.put<any>(`${this.baseUrl}/${courseId}`, course).subscribe(data => {
       this.getCourses();
+    },
+    error=>{
+      alert("failed")
     });
   }
 
   deleteCourse(courseId: number) {
     this.http.delete<any>(`${this.baseUrl}/${courseId}`).subscribe(data => {
       this.getCourses();
+    },
+    error=>{
+      alert("failed")
     });
   }
 }

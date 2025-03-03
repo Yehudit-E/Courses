@@ -14,26 +14,42 @@ export class LessonsService {
   constructor(private http: HttpClient) { }
 
   getLessons(courseId: number) {
-    this.http.get<Lesson[]>(`${this.baseUrl}/${courseId}/lessons`).subscribe(data => {
+    this.http.get<Lesson[]>(`${this.baseUrl}/${courseId}/lessons`).subscribe(
+      data => {
       this.lessons.next(data);
+    },
+    error=>{
+      alert("failed")
     })
   }
 
   addLesson(lesson: Lesson) {
-    this.http.post<any>(`${this.baseUrl}/${lesson.courseId}/lessons`, lesson).subscribe(data => {
+    this.http.post<any>(`${this.baseUrl}/${lesson.courseId}/lessons`, lesson).subscribe(
+    data => {
       this.getLessons(lesson.courseId);
+    },
+    error=>{
+      alert("failed")
     })
   }
 
   editLesson(lesson: Lesson) {
-    this.http.put<any>(`${this.baseUrl}/${lesson.courseId}/lessons/${lesson.id}`, lesson).subscribe(data => {
+    this.http.put<any>(`${this.baseUrl}/${lesson.courseId}/lessons/${lesson.id}`, lesson).subscribe(
+    data => {
       this.getLessons(lesson.courseId);
+    },
+    error=>{
+      alert("failed")
     });
   }
 
   deleteLesson(courseId: number, lessonId: number) {
-    this.http.delete<any>(`${this.baseUrl}/${courseId}/lessons/${lessonId}`).subscribe(data => {
+    this.http.delete<any>(`${this.baseUrl}/${courseId}/lessons/${lessonId}`).subscribe(
+    data => {
       this.getLessons(courseId);
+    },
+    error=>{
+      alert("failed")
     });
   }
 }

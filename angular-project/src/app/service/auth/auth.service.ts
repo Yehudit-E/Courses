@@ -17,7 +17,7 @@ export class AuthService {
         this.login(user);
       },
       (error) =>{
-        console.error('Registration failed', error);
+        alert("failed")
       });
   }
 
@@ -33,7 +33,7 @@ export class AuthService {
         console.log(this.userService.user)
         },
       (error) => {
-        console.error('Login failed', error);
+        alert("failed")
       }
     ); 
   }
