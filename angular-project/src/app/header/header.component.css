@@ -1,0 +1,72 @@
+.toolbar {
+    direction: ltr;
+    /* background-color: #f0f0f0; */
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+button {
+    display: flex;
+    align-items: center;
+    /* מרכז את האייקון והטקסט */
+    margin-left: 8px;
+    /* רווח בין הכפתורים */
+}
+
+mat-icon {
+    margin: 0;
+}
+
+.login-button {
+    border: 1px solid white;
+    border-radius: 4px;
+    padding: 8px 16px;
+    margin-left: 2%;
+    background-color: transparent;
+    transition: background-color 0.3s;
+    margin-right: 2%;
+    margin-left: 0;
+    transition: none;
+}
+
+.login-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.text{
+    margin-left: 5px;
+}
+
+.text2{
+    margin-left: 8px;
+}
+.custom-button {
+  border: none!important;
+  background: none;
+  box-shadow: none;
+  text-transform: none !important;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.custom-button:hover {
+  background: none !important; /* ביטול אפקט מעבר */
+}
+
+.user-avatar {
+    background-color: #1976d2; /* צבע כחול של MUI */
+    color: white;
+    font-weight: bold;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 18px;
+  }
+  
+  

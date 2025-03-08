@@ -1,0 +1,82 @@
+@if(auth$.value.role=="teacher"||auth$.value.role=="admin")
+{
+<div style="margin-top: 25px; margin-left: 25px;">
+  <button (click)="addCourseClick()" mat-flat-button color="primary" class="add-course-btn">
+    <mat-icon class="icon">add</mat-icon>
+    Add Course
+  </button>
+</div>
+}
+
+<div class="courses-container">
+  @for (course of (courses$ | async); track course.title) {
+  <mat-card class="course-card">
+    <mat-card-header>
+      <mat-card-title>{{ course.title }}</mat-card-title>
+      <mat-card-subtitle>{{ course.description }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-actions class="actions">
+      @if(auth$.value.role=="teacher"||auth$.value.role=="admin"){
+      <button appTooltip tooltip="edit" mat-icon-button class="icon-btn" (click)="editCourseClick(course)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button appTooltip tooltip="delete" mat-icon-button class="icon-btn" (click)="deleteCourseClick(course.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      }@else {  
+          @if(!courseExist(course.id)){
+             <button mat-icon-button (click)="login(course.id)" appTooltip tooltip="login">
+                <mat-icon>login</mat-icon>
+             </button>
+          }
+          @else{
+          <button mat-icon-button (click)="logout(course.id)" appTooltip tooltip="logout">
+            <mat-icon>logout</mat-icon>
+          </button>
+        }
+      }
+      <button appTooltip tooltip="lessons list" mat-icon-button class="icon-btn" (click)="viewLessonsClick(course.id)">
+        <mat-icon>assignment</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  }
+</div>
+
+@if(flagEdit){
+<app-course-form [course]="courseToEditOrAdd" (courseUpdated)="updateCourse($event)"></app-course-form>
+}
+@if(flagAdd){
+<app-course-form [course]="courseToEditOrAdd" (courseUpdated)="addCourse($event)"></app-course-form>
+}
+
+<style>
+  .courses-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .course-card {
+    width: 300px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 16px;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    /* מיישר את האיקונים לימין */
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .icon-btn mat-icon {
+    color: #333;
+    /* כל האיקונים בצבע כהה */
+  }
+</style>

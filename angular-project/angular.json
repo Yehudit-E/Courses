@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "My-Courses": {
+    "angular-project": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/my-courses",
+            "outputPath": "dist/angular-project",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -28,12 +28,7 @@
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -63,10 +58,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "My-Courses:build:production"
+              "buildTarget": "angular-project:build:production"
             },
             "development": {
-              "buildTarget": "My-Courses:build:development"
+              "buildTarget": "angular-project:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -74,7 +69,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "My-Courses:build"
+            "buildTarget": "angular-project:build"
           }
         },
         "test": {
@@ -100,6 +95,6 @@
     }
   },
   "cli": {
-    "analytics": "d5abb8e7-9e80-4eec-8969-b52a9e5ba7f4"
+    "analytics": false
   }
 }

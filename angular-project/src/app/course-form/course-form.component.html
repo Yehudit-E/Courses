@@ -1,0 +1,22 @@
+<div class="overlay">
+    <div id="root" class="form-container">
+      <h1>{{ course.title ? 'Edit Course' : 'Add Course' }}</h1>
+      <form [formGroup]="courseForm" (ngSubmit)="onSubmit()" class="form">
+        
+        <mat-form-field appearance="outline" class="input-field full-width">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" required />
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="input-field full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" required></textarea>
+        </mat-form-field>
+
+        <div class="button-group full-width">
+          <button mat-flat-button type="button" (click)="cancelClick()" color="primary" class="full-width">Cancel</button>
+          <button mat-flat-button type="submit" color="primary" class="full-width">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
